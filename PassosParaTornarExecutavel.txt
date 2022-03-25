@@ -1,0 +1,27 @@
+# 1) Instale o cxFreeze utiliznado "pip install cx-Freeze" (https://cx-freeze.readthedocs.io/en/latest/overview.html)
+# 2) Instale o nbconvert utiliznado "pip install nbconvert" ou "conda install nbconvert" para poder converter o arquivo em jupyter notebook (https://nbconvert.readthedocs.io/en/latest/)
+# 3) Converta o Jupyter Notebook para Python, abrindo o prompt de comando e digitando "jupyter nbconvert --to script Tutorial-Automacao-Web-com-Python.ipynb" dentro da pasta do projeto
+# 4) Crie um arquivo chamado setup.py e configure assim:
+'''
+    import sys
+    from cx_Freeze import setup, Executable
+
+    # Dependencies are automatically detected, but it might need fine tuning.
+    #como Tutorial-Automacao-Web-com-Python.ipynb que foi convertido para .py isava selenium, eu mencionei aqui em includes
+    build_exe_options = {"packages": ["os"], "includes": ["selenium"]} 
+
+    # GUI applications require a different base on Windows (the default is for
+    # a console application).
+    base = None
+    if sys.platform == "win32":
+        base = "Win32GUI"
+
+    setup(
+        name = "Tutorial-Automacao-Web-com-Python", #Nome do executavel
+        version = "0.1", #versçao
+        description = "Ele abre um site!", #descrição
+        options = {"build_exe": build_exe_options},
+        executables = [Executable("Tutorial-Automacao-Web-com-Python.py", base=base)] #em executable, informe o nome do projeto convertido em .py
+    )
+'''
+# 4) Para criar executável digite cxfreeze .\<nome do que é para ser executavel>, no caso seria "cxfreeze Tutorial-Automacao-Web-com-Python.py"
